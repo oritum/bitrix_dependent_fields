@@ -2,6 +2,10 @@
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 CModule::IncludeModule("iblock");
 
+use Bitrix\Main\Page\Asset;
+
+$asset = Asset::getInstance();
+
 class LevelsProcessor {
     private $arParams;
     private $arResult;
@@ -135,11 +139,11 @@ $processor = new LevelsProcessor($arParams);
 $arResult = $processor->process();
 
 if ($this->InitComponentTemplate()) {
-    $APPLICATION->AddHeadScript($this->__template->__folder . "/script.js");
-    $APPLICATION->AddHeadString(
+    $asset->addJs($this->__template->__folder . "/script.js");
+    $asset->addString(
         '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"  rel="stylesheet">'
         );
-    $APPLICATION->AddHeadString(
+    $asset->addString(
         '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"  integrity="sha384-ZOkYXD6+xI1swzYtTqMX03NdUu+hvTffM+mReZ3FiSV55vINNSKtvzOvYmK9Vh4C" crossorigin="anonymous"></script>'
         );
 }
